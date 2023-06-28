@@ -1,4 +1,5 @@
 import db from '../models/index';
+import CRUDService from '../services/CRUDServices';
 class homeController {
     getHomePage = async (req, res) => {
         try {
@@ -7,6 +8,15 @@ class homeController {
         } catch (error) {
             console.log(error);
         }
+    }
+    getCrudPage = (req, res) => {
+        res.render('crud');
+    }
+    handleSubmitForm = async (req, res) => {
+        let message = await CRUDService.createNewUser(req.body);
+        console.log(message);
+        let data = req.body;
+        res.send(data);
     }
 }
 module.exports = new homeController;
